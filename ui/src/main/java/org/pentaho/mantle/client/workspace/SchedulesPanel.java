@@ -757,10 +757,11 @@ public class SchedulesPanel extends SimplePanel {
 
       if ( BrowserEvents.CLICK.equals( event.getNativeEvent().getType() ) ) {
         // Get the selected line
-        int rowIndex = event.getIndex();
-        JsJob selectedData = table.getVisibleItem( rowIndex );
+        JsJob selectedData = table.getVisibleItem( event.getIndex() - table.getPageStart() );
         if ( selectedData != null ) {
-          selectionModel.setSelected( selectedData, !selectionModel.isSelected( selectedData ) );
+          if ( event.getColumn() != 0 ) {
+            selectionModel.setSelected( selectedData, !selectionModel.isSelected( selectedData ) );
+          }
         }
       }
 
